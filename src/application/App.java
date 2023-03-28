@@ -1,10 +1,16 @@
+package application;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
 import java.util.Map;
+
+import model.entities.CriaSticker;
+import util.JsonParser;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -33,6 +39,10 @@ public class App {
             }
             System.out.println("\n\u001b[1mPoster do filme(link):\u001b[m " + filme.get("image"));
             System.out.println("");
+            
+            
+            CriaSticker sticker = new CriaSticker();
+            sticker.createImage(new URL(filme.get("image")).openStream(), filme.get("title"), filme.get("title") + ".png");
         }
     }
 }
